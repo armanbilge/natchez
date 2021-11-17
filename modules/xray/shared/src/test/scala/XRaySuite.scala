@@ -21,11 +21,11 @@ class XRaySuite extends ScalaCheckSuite {
   val notSampled = "Root=1-5759e988-bd862e3fe1be46a994272793;Sampled=0"
 
   val genTraceId = for {
-    time <- Gen.resize(8, Gen.hexStr)
-    identifier <- Gen.resize(24, Gen.hexStr)
+    time <- Gen.buildableOfN[String, Char](8, Gen.hexChar)
+    identifier <- Gen.buildableOfN[String, Char](24, Gen.hexChar)
   } yield s"1-$time-$identifier"
 
-  val genSegmentId = Gen.resize(16, Gen.hexStr)
+  val genSegmentId = Gen.buildableOfN[String, Char](16, Gen.hexChar)
 
   val genHeader = for {
     traceId <- genTraceId
