@@ -61,7 +61,7 @@ class XRaySuite extends ScalaCheckSuite {
     assertEquals(XRaySpan.encodeHeader(rootId, None, false), notSampled)
   }
 
-  property("header encoding/decoding round-trip") {
+  property("header encoding/parsing round-trip") {
     forAll { (header: XRaySpan.XRayHeader) =>
       val encoded = XRaySpan.encodeHeader(header.traceId, header.parentId, header.sampled)
       val parsed = XRaySpan.parseHeader(encoded)
